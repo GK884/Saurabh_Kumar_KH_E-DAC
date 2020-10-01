@@ -12,9 +12,9 @@ public class QUES10
 				{
 					System.out.print(" *");
 				}
-				else if((i+j)==6)
+				else if((i+j)==5)
 				{
-					System.out.print("*");
+					System.out.print(" *");
 				}
 				else
 				{
@@ -25,3 +25,16 @@ public class QUES10
 		}
 	}
 }
+
+/*
+
+OUTPUT
+
+ * * * * * *
+ *       *  
+ *     *    
+ *   *      
+ * *        
+ *          
+
+*/

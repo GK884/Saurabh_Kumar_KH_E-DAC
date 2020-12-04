@@ -1,0 +1,27 @@
+create table Member (Member_id INTEGER(5), Member_Name varchar(20), Member_address varchar(50), Acc_Open_Date date, Membership_type varchar(20), Penalty_Amount integer(7), primary key(Member_id));
+create table Book (Book_No integer(6), Book_Name varchar(30), Author_cost varchar(30), cost integer(7), category char(10), primary key(Book_No));
+create table Issue (Lib_issue_id integer(10), Book_no integer(6), Member_id integer(5), issue_date date, return_date date);
+
+insert into Member values 
+(1, 'Richa Sharma', 'Pune', '2005-12-10', 'Lifetime',null),
+(2, 'Garima Sen', 'Pune', current_date(), 'Annual', null);
+
+select * from Member;
+
+insert into book values 
+(101, 'let us C', 'Denis Ritchie', 450, 'System'),
+(102, 'Oracle - complete ref', 'Loni', 550, 'Database'),
+(103, 'Mastering SQL', 'Loni', 250, 'Database'),
+(104, 'PL SQL- Ref', 'Scott Urman', 750, 'Database');
+
+select * from book;
+
+insert into issue values 
+(7001, 101, 1, '2006-12-10', null),
+(7002, 102, 2, '2006-12-25', null),
+(7003, 104, 1, '2006-01-15', null),
+(7004, 101, 1, '2006-07-04', null),
+(7005, 104, 2, '2006-11-15', null),
+(7006, 101, 3, '2006-02-18', null);
+
+select * from issue;

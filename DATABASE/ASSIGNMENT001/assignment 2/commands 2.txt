@@ -1,1 +1,359 @@
+DBT Assignment 2
+Following are the questions on Publishers, Authors, Titles and titleauthors tables:-
+*********************************************************
+
+1.	List pname, phone, email from Publishers.
+
+
+mysql> SELECT PNAME, PHONE, EMAIL FROM PUBLISHER;
++------------------+----------------+-----------------------------+
+| PNAME            | PHONE          | EMAIL                       |
++------------------+----------------+-----------------------------+
+| WILLEY           | 91-11-23260877 | WDT@VSNL.NET                |
+| WROX             | NULL           | INFO@WROX.COM               |
+| TATA MCGRAW-HILL | 91-11-33333322 | FEEDBACK@TATAMCGRAWHILL.COM |
+| TECHMEDIA        | 91-11-33257660 | BOOKS@TECHMEDIA.COM         |
++------------------+----------------+-----------------------------+
+4 rows in set (0.01 sec)
+
+
+2.	List aname, phone from Authors.
+
+mysql> SELECT ANAME, PHONE FROM AUTHORS;
++-----------------+-------+
+| ANAME           | PHONE |
++-----------------+-------+
+| HERBERT SCHILD  | NULL  |
+| JAMES GOODWILL  | NULL  |
+| DAVAID HUNTER   | NULL  |
+| STEPHEN WALTHER | NULL  |
+| KEVIN LONEY     | NULL  |
+| ED. ROMANS      | NULL  |
++-----------------+-------+
+6 rows in set (0.00 sec)
+
+3.	List titleid, title, pubdate from Titles.
+
+mysql> SELECT TITLEID, TITLE, PUBDATE FROM TITLES;
++---------+----------------------+------------+
+| TITLEID | TITLE                | PUBDATE    |
++---------+----------------------+------------+
+|    1001 | ASP.NET UNLEASHED    | 2002-04-12 |
+|    1002 | ORACLE10G COMP. REF. | 2005-05-01 |
+|    1003 | MASTERING EJB        | 2005-02-03 |
+|    1004 | JAVA COMP. REF       | 2005-04-03 |
+|    1005 | PRO. VB.NET          | 2005-06-15 |
++---------+----------------------+------------+
+5 rows in set (0.01 sec)
+
+4.	List auid, titleid, importance from titleauthors.
+
+mysql> SELECT AUID, TITLEID, IMPORTANCE FROM TITLEAUTHORS;
++------+---------+------------+
+| AUID | TITLEID | IMPORTANCE |
++------+---------+------------+
+|  104 |    1001 |          1 |
+|  105 |    1002 |          1 |
+|  106 |    1003 |          1 |
+|  101 |    1004 |          1 |
+|  102 |    1005 |          2 |
+|  103 |    1005 |          1 |
++------+---------+------------+
+6 rows in set (0.01 sec)
+
+*************************(like)***************************
+1.	select subject name "oracle" from subjects table.
+
+mysql> SELECT SNAME FROM SUBJECTS WHERE SNAME LIKE '%ORACLE%';
++---------------------+
+| SNAME               |
++---------------------+
+| ORACLE DATABASE 10G |
++---------------------+
+1 row in set (0.02 sec)
+
+2.	select subject name starts with 'j'.
+
+mysql> SELECT SNAME FROM SUBJECTS WHERE SNAME LIKE 'J%';
++-------------------------+
+| SNAME                   |
++-------------------------+
+| JAVA LANGUAGE           |
+| JAVA ENTERPRISE EDITION |
++-------------------------+
+2 rows in set (0.00 sec)
+
+3.	select subject name which contains ".net" .
+
+mysql> SELECT SNAME FROM SUBJECTS WHERE SNAME LIKE '%.NET%';
++------------------+
+| SNAME            |
++------------------+
+| ASP.NET          |
+| VISUAL BASIC.NET |
++------------------+
+2 rows in set (0.00 sec)
+
+4.	select author name ends whith 'er'.
+
+mysql> SELECT SNAME FROM SUBJECTS WHERE SNAME LIKE '%ER';
+Empty set (0.00 sec)
+
+5.	select publishers name which contains "hill".
+
+mysql> SELECT PNAME FROM PUBLISHER WHERE PNAME LIKE '%HILL%';
++------------------+
+| PNAME            |
++------------------+
+| TATA MCGRAW-HILL |
++------------------+
+1 row in set (0.01 sec)
+
+******************(relational operator)***********************
+1.	select title from title table having price less than 500.
+
+mysql> SELECT TITLE FROM TITLES WHERE PRICE < 500;
++----------------+
+| TITLE          |
++----------------+
+| MASTERING EJB  |
+| JAVA COMP. REF |
+| PRO. VB.NET    |
++----------------+
+3 rows in set (0.00 sec)
+
+2.	select title from title table published before '3 april'.
+
+mysql> SELECT TITLE FROM TITLES WHERE PUBDATE > '2005-04-03';
++----------------------+
+| TITLE                |
++----------------------+
+| ORACLE10G COMP. REF. |
+| PRO. VB.NET          |
++----------------------+
+2 rows in set (0.02 sec)
+
+3.	select subject name from subject having id as 'java' or 'jee'.
+
+mysql> SELECT SUBID FROM SUBJECTS WHERE SUBID = 'JAVA' OR SUBID = 'JEE';
++-------+
+| SUBID |
++-------+
+| JAVA  |
+| JEE   |
++-------+
+2 rows in set (0.02 sec)
+
+4.	select author name from author table id greater than '103'.
+
+mysql> SELECT ANAME FROM AUTHORS WHERE AUID > 103;
++-----------------+
+| ANAME           |
++-----------------+
+| STEPHEN WALTHER |
+| KEVIN LONEY     |
+| ED. ROMANS      |
++-----------------+
+3 rows in set (0.01 sec)
+
+5.	select all from title having titleid as 101 or price > 400.
+
+mysql> SELECT * FROM TITLES WHERE TITLEID = 101 OR PRICE > 400;
++---------+----------------------+-------+-------+------------+-------+-------+
+| TITLEID | TITLE                | PUBID | SUBID | PUBDATE    | COVER | PRICE |
++---------+----------------------+-------+-------+------------+-------+-------+
+|    1001 | ASP.NET UNLEASHED    |     4 | ASP   | 2002-04-12 | P     |   540 |
+|    1002 | ORACLE10G COMP. REF. |     3 | ORA   | 2005-05-01 | P     |   575 |
+|    1003 | MASTERING EJB        |     1 | JEE   | 2005-02-03 | P     |   475 |
+|    1004 | JAVA COMP. REF       |     3 | JAVA  | 2005-04-03 | P     |   499 |
+|    1005 | PRO. VB.NET          |     2 | VB    | 2005-06-15 | P     |   450 |
++---------+----------------------+-------+-------+------------+-------+-------+
+5 rows in set (0.01 sec)
+
+**********************(IN operator)*************************
+
+6.select all from publishers table  where publisher name is ('TECHMEDIA', 'WROX');
+
+mysql> SELECT * FROM PUBLISHER WHERE PNAME IN ('TECHMEDIA', 'WROX');
++-------+-----------+---------------------+----------------+
+| pubid | pname     | email               | phone          |
++-------+-----------+---------------------+----------------+
+|     2 | WROX      | INFO@WROX.COM       | NULL           |
+|     4 | TECHMEDIA | BOOKS@TECHMEDIA.COM | 91-11-33257660 |
++-------+-----------+---------------------+----------------+
+2 rows in set (0.00 sec)
+
+******************(aggregate function)**********************
+
+1.	select maximum price from titles table.
+mysql> SELECT MAX(PRICE) FROM TITLES;
++------------+
+| MAX(PRICE) |
++------------+
+|        575 |
++------------+
+1 row in set (0.02 sec)
+
+2.	select average importance from titleauthors. 
+mysql> SELECT AVG(IMPORTANCE) FROM TITLEAUTHORS;
++-----------------+
+| AVG(IMPORTANCE) |
++-----------------+
+|          1.1667 |
++-----------------+
+1 row in set (0.01 sec)
+3.	select number of records from author table.
+
+mysql> SELECT COUNT(AUID) FROM AUTHORS;
++-------------+
+| COUNT(AUID) |
++-------------+
+|           6 |
++-------------+
+1 row in set (0.09 sec)
+4.	select sum of prices of all books.
+mysql> SELECT SUM(PRICE) FROM TITLES;
++------------+
+| SUM(PRICE) |
++------------+
+|       2539 |
++------------+
+1 row in set (0.00 sec)
+********************(date)********************************
+1.	select title from title table where month is 'Apr'.
+mysql> SELECT COUNT(*) FROM TITLES WHERE MONTH(PUBDATE) = '04';
++----------+
+| COUNT(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.01 sec)
+
+mysql> SELECT COUNT(*) FROM TITLES WHERE YEAR(PUBDATE) = '2002' AND MONTH(PUBDATE) = '04';
++----------+
+| COUNT(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.01 sec)
+
+2.	select year from system date.
+mysql> SELECT YEAR('2020-12-05');
++--------------------+
+| YEAR('2020-12-05') |
++--------------------+
+|               2020 |
++--------------------+
+1 row in set (0.00 sec)
+3.	select month from system date.
+mysql> SELECT MONTH('2020-12-05');
++---------------------+
+| MONTH('2020-12-05') |
++---------------------+
+|                  12 |
++---------------------+
+1 row in set (0.00 sec)
+4.	select last day of month when 'java' book published.
+mysql> SELECT LAST_DAY(NOW());
++-----------------+
+| LAST_DAY(NOW()) |
++-----------------+
+| 2020-12-31      |
++-----------------+
+1 row in set (0.00 sec)
+**********************(DML)*******************************
+create table Employee with emp_id (number),emp_name(char(50)) and insert some value.
+1.	Add one column name 'dept_id ' in table name 'Employee';
+
+mysql> SELECT * FROM EMPLOYEE;
++--------+----------+---------+
+| EMP_ID | EMP_NAME | DEPT_ID |
++--------+----------+---------+
+|      1 | ABC      |    NULL |
+|      2 | DEF      |    NULL |
+|      3 | GHI      |    NULL |
++--------+----------+---------+
+3 rows in set (0.00 sec)
+
+2. Change the datatype of column 'char' from tablename 'Employee' to 'varchar2'.
+
+
+3. update name of employee to 'Scott'
+mysql> UPDATE EMPLOYEE SET EMP_NAME = 'SCOTT';
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 3  Changed: 2  Warnings: 0
+
+4.	truncate the table.
+mysql> TRUNCATE TABLE EMPLOYEE;
+Query OK, 0 rows affected (0.15 sec)
+**********************************************************
+Table=> Emp
+SAL(float(7,3))
+------------------
+1234.567
+1530.019
+1652.786
+1775.156
+Perform :
+1.	round
+mysql> SELECT ROUND(30.5);
++-------------+
+| ROUND(30.5) |
++-------------+
+|          31 |
++-------------+
+1 row in set (0.03 sec)
+2. truncate 
+3. ceil
+mysql> SELECT CEIL(32.1);
++------------+
+| CEIL(32.1) |
++------------+
+|         33 |
++------------+
+1 row in set (0.00 sec)
+6.	floor
+mysql> SELECT FLOOR(32.1);
++-------------+
+| FLOOR(32.1) |
++-------------+
+|          32 |
++-------------+
+1 row in set (0.00 sec)
+7.	sign(-15)
+mysql> SELECT SIGN(-15);
++-----------+
+| SIGN(-15) |
++-----------+
+|        -1 |
++-----------+
+1 row in set (0.00 sec)
+8.	mod
+mysql> SELECT MOD(23,2);
++-----------+
+| MOD(23,2) |
++-----------+
+|         1 |
++-----------+
+1 row in set (0.01 sec)
+9.	sqrt
+mysql> SELECT SQRT(16);
++----------+
+| SQRT(16) |
++----------+
+|        4 |
++----------+
+1 row in set (0.00 sec)
+10.	power
+mysql> SELECT POWER(10,2);
++-------------+
+| POWER(10,2) |
++-------------+
+|         100 |
++-------------+
+1 row in set (0.01 sec)
+*****************************************************************
+1. perform all string function on string "CDAC juhu".
+2. perform different date and time functions. 
+*****************************End**********************************
 

@@ -276,7 +276,7 @@ mysql> SELECT * FROM EMPLOYEE;
 3 rows in set (0.00 sec)
 
 2. Change the datatype of column 'char' from tablename 'Employee' to 'varchar2'.
-
+mysql> ALTER TABLE EMPLOYEE MODIFY COLUMN EMP_NA VARCHAR(20);
 
 3. update name of employee to 'Scott'
 mysql> UPDATE EMPLOYEE SET EMP_NAME = 'SCOTT';

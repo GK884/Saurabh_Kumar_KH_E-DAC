@@ -1,0 +1,165 @@
+CREATE DATABASE TRIGGER_DB;
+USE TRIGGER_DB;
+CREATE TABLE ORD_MASTER
+(
+	ORD_NO INTEGER PRIMARY KEY,
+    CUST_CD VARCHAR(10),
+    STATUS VARCHAR(5)
+);
+INSERT INTO ORD_MASTER VALUES
+(1, 'C1', 'P');
+
+CREATE TABLE ORD_DTL
+(
+	ORD_NO INTEGER,
+    PROD_CD VARCHAR(10),
+    QTY INTEGER
+);
+
+INSERT INTO ORD_DTL VALUES
+(1, 'P1', 100),
+(1, 'P2', 200);
+
+CREATE TABLE PROD_MASTER
+(
+	PROD_CD VARCHAR(5),
+    PROD_NAME VARCHAR(20),
+    QTY_IN_STOCK INTEGER(5),
+    BOOKED_QTY INTEGER(5),
+    CONSTRAINT PK_KEY PRIMARY KEY(PROD_CD)
+);
+
+INSERT INTO PROD_MASTER VALUES
+('P1', 'FLOPPIES', 10000, 1000),
+('P2', 'PRINTERS', 5000, 600),
+('P3', 'MODEMS', 3000, 200);
+
+SELECT * FROM ORD_MASTER;
+
+SELECT * FROM ORD_DTL;
+
+SELECT * FROM PROD_MASTER;
+
+/*
+1. Write a Before Insert trigger on Ord_dtl. 
+Anytime a row is inserted in Ord_dtl, the
+Booked_qty in Prod_master should be increased accordingly.
+*/
+DELIMITER $$
+CREATE TRIGGER QUES01 
+BEFORE INSERT 
+ON ORD_DTL
+FOR EACH ROW
+BEGIN
+	UPDATE PROD_MASTER 
+    SET BOOKED_QTY = BOOKED_QTY + NEW.QTY 
+    WHERE PROD_CD = NEW.PROD_CD;
+END $$
+
+INSERT INTO ORD_DTL VALUES
+(1, 'P3', 300);
+
+/*
+2. Write a Before Delete trigger on Ord_dtl. 
+Anytime a row is deleted from Ord_dtl, the
+Booked_qty in Prod_master should be decreased accordingly.
+*/
+
+DELIMITER $$
+CREATE TRIGGER QUES02
+BEFORE DELETE
+ON ORD_DTL
+FOR EACH ROW
+BEGIN
+	UPDATE Prod_master 
+    SET BOOKED_QTY = BOOKED_QTY - OLD.QTY 
+    WHERE PROD_CD = OLD.PROD_CD;
+END $$
+
+DELETE FROM ORD_DTL WHERE PROD_CD = 'P3';
+
+SELECT * FROM ORD_MASTER;
+
+SELECT * FROM ORD_DTL;
+
+SELECT * FROM PROD_MASTER;
+
+
+/*
+3. write A trigger to update the total salary of a department in 
+dept_sal  table  when an employee is added or 
+removed from  emp table .
+Create table dept_sal (dept_no, tota_salary) – 
+this table contains the total of salaries of 
+employees working into that particular department
+*/
+
+CREATE TABLE DEPT_SAL
+(
+	DEPT_NO INTEGER(5),
+    TOTAL_SALARY INTEGER(5)
+);
+
+INSERT INTO DEPT_SAL VALUES
+(10, 12000),
+(30, 1950);
+
+Create table EMP 
+(
+EMPNO numeric(4) not null, 
+ENAME varchar(30) not null, 
+JOB varchar(10), 
+MGR numeric(4), 
+HIREDATE date, 
+SAL numeric(7,2), 
+DEPTNO numeric(2) 
+);
+
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) 
+values(1000,  'Manish' , 'SALESMAN', 1003,  '2020-02-18', 600,  30) ;
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) 
+values(1001,  'Manoj' , 'SALESMAN', 1003,  '2018-02-18', 600,  30) ;
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) 
+values(1002 , 'Ashish', 'SALESMAN',1003 , '2013-02-18',  750,  30 );
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) 
+values(1004,  'Rekha', 'ANALYST', 1006 , '2001-02-18', 3000,  10);
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) 
+values(1005 , 'Sachin', 'ANALYST', 1006 ,  '2019-02-18', 3000, 10 );
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) 
+values(1006,  'Pooja',  'MANAGER'  , null, '2000-02-18' ,6000, 10 );
+
+DROP TRIGGER QUES03;
+
+DELIMITER $$
+CREATE TRIGGER QUES03
+AFTER INSERT 
+ON EMP
+FOR EACH ROW
+BEGIN
+	UPDATE DEPT_SAL SET TOTAL_SALARY = TOTAL_SALARY + NEW.SAL WHERE DEPT_NO = NEW.EMPNO;
+END $$
+
+INSERT INTO EMP VALUES (1007, 'CAB', 'HERO', 1003, '2020-12-12', 9000, 10);
+
+DELIMITER $$
+CREATE TRIGGER QUES03A
+AFTER DELETE 
+ON EMP
+FOR EACH ROW
+BEGIN
+	UPDATE DEPT_SAL SET TOTAL_SALARY = TOTAL_SALARY - OLD.SAL WHERE DEPT_NO = OLD.DEPTNO;
+END$$
+
+DELETE FROM EMP WHERE EMPNO = 1001 ;
+
+
+
+SELECT * FROM EMP;
+
+SELECT * FROM DEPT_SAL;
+
+SELECT * FROM ORD_MASTER;
+
+SELECT * FROM ORD_DTL;
+
+SELECT * FROM PROD_MASTER;

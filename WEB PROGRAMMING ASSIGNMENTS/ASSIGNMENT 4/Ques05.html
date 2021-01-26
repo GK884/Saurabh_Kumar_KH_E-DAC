@@ -1,0 +1,26 @@
+<!-- 
+    You are having sample data for the link. 
+    Write jQuery code to change the hyperlink and the text of an existing link. 
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Ques05</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <p><a href="https://www.google.com" id="hyper" target="_blank">click here</a></p>
+        </div>
+        <script>
+            $(document).ready(function(){
+                var hyper2 = "https://facebook.com";
+                $("#hyper").attr("href",hyper2)
+            })
+        </script>
+    </body>
+</html>

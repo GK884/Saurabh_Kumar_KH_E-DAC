@@ -1,0 +1,33 @@
+<!-- 3 Write a JavaScript function to validate whether a given value is RegEx or not. -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>QUES03</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div>
+            <div class="col">
+                Enter ROll no(Naming Conventions): <input type="text" id="fname" placeholder="FirstName">
+                <button onclick="MyFun()">Check REGEX(JH)</button>
+            </div>
+            <div id="mag"></div>
+        </div>
+        <script>
+            function MyFun(){
+                var input = document.getElementById("fname").value;
+                var UpReg = new RegExp("JH"); 
+                var LwReg = new RegExp("jh");
+                var insens1 = new RegExp("jH");
+                var insens2 = new RegExp("Jh");
+                if(UpReg.test(input)||LwReg.test(input)||insens1.test(input)||insens2.test(input))
+                    document.getElementById("mag").innerHTML = "Student is from JUHU";
+                else
+                    document.getElementById("mag").innerHTML = "Student is from KHARGHAR";
+            }
+        </script>
+    </body>
+</html>

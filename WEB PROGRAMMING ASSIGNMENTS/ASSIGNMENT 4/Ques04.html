@@ -1,0 +1,28 @@
+<!-- Write a jQuery program to get a single element from a selection of elements of a HTML page. -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Ques04</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="css/style.css" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    </head>
+    <body>
+        <div class="col">
+            Enter a String: <input type="text" id="fname" placeholder="String">
+            <button id="button">Print String</button>
+        </div>
+        <div id="mag"></div>
+        <script>
+            $(document).ready(function(){
+                $("#button").click(function(){
+                    var abc = $("#fname").val();
+                    $("#mag").text(abc)
+                    // alert(abc);
+                });
+            });
+        </script>
+    </body>
+</html>

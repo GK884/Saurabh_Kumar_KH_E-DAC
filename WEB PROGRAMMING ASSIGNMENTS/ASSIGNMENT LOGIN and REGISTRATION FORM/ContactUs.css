@@ -1,0 +1,23 @@
+body{
+    background: url(../LOGIN/images/electronics-repair-and-upgrade-background-.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#p01{
+    color: blue; 
+    text-align: center; 
+    padding-top: 5px;
+}
+
+#p02{
+    color: blue; 
+    text-align: center; 
+    padding-top: 5px;
+}
+
+#p03{
+    color: blue; 
+    text-align: center; 
+    padding-top: 5px;
+}

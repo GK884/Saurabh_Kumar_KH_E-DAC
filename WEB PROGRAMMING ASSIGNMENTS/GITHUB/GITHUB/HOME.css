@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item-me{
+    width: 30px;
+    height: 30px;
+    border-radius: 20px;
+}
+
+/* style="color: blanchedalmond;" */
+.repo1{
+    width: 400px;
+    height: 120px;
+    background-color: white;
+    border: 2px black solid;
+    border-radius: 5px;
+    padding: 10px 0px 0px 5px; 
+    position: relative;
+}
+.repo2{
+    width: 400px;
+    height: 120px;
+    background-color: white;
+    border: 2px black solid;
+    position: relative;
+    border-radius: 5px;
+    padding: 10px 0px 0px 5px; 
+    float: right;
+}
+
+.contibutions{
+    width: 100%;
+    height: 150px;
+    background-color: black;
+    color: blanchedalmond;
+}
+
+#buttons{
+    padding-left: 7px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-right: 50px;
+    border-radius: 5px;
+    font-size: small;
+}
+#buttons:hover{
+    background: blue;
+}
+
+#tdfutter{
+    padding: 10px 20px 10px 20px;
+    font-size: smaller;
+}
